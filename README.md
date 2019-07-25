@@ -1,6 +1,10 @@
 # Traefik on Google Cloud Kubernetes Engine with Terraform
 
-This is a based on https://github.com/SantoDE/terraform-gcp-kubernetes-traefik
+This is a based on a tutorial that you can fint at:
+
+[Traefik on a Google Kubernetes Engine Cluster managed by Terraform](https://medium.com/google-cloud/traefik-on-a-google-kubernetes-engine-cluster-managed-by-terraform-ad871be8ee26)
+
+https://github.com/SantoDE/terraform-gcp-kubernetes-traefik
 
 ## Requirements
 * Google Cloud Account

@@ -1,0 +1,38 @@
+# declare Traefik deployment
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: traefik-ingress-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: traefik-ingress-controller
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: ssl
+          secret:
+            secretName: traefik-cert
+      volumes:
+        - name: config
+          configMap:
+            name: traefik-config
+      containers:
+      - name: traefik
+        image: "traefik:1.6"
+        volumeMounts:
+          - mountPath: "/ssl"
+            name: "ssl"
+          - mountPath: "/etc/traefik/config"
+            name: config
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        args:
+        - --configfile=/etc/traefik/config/traefik.toml
+        - --api
+        - --kubernetes
+        - --logLevel=DEBUG
